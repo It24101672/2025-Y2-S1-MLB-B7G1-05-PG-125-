@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Dating Matches Predictor</title>
+    <style>
+        body {font-family: 'Segoe UI', sans-serif; background: #f4f6f9; margin:0; padding:20px;}
+        .container {max-width: 560px; margin:40px auto; background:#fff; padding:30px; border-radius:12px; box-shadow:0 8px 25px rgba(0,0,0,.1);}
+        h1 {text-align:center; color:#5a67d8;}
+        .form-group {margin-bottom:18px;}
+        label {display:block; margin-bottom:6px; font-weight:600; color:#2d3748;}
+        select, input[type=number] {width:100%; padding:10px; border:2px solid #e2e8f0; border-radius:6px; font-size:15px;}
+        select:focus, input:focus {border-color:#667eea; outline:none;}
+        button {background:#667eea; color:#fff; padding:12px; border:none; border-radius:6px; font-size:16px; cursor:pointer; width:100%; font-weight:bold;}
+        button:hover {background:#5a67d8;}
+        .result {margin-top:20px; padding:14px; border-radius:6px; text-align:center; font-size:18px; font-weight:bold;}
+        .success {background:#f0fff4; border:2px solid #9ae6b4; color:#22543d;}
+        .error   {background:#fff5f5; border:2px solid #fc8181; color:#c53030;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Online Dating Matches Predictor</h1>
+
+    <form method="POST">
+        <div class="form-group">
+            <label for="gender">Gender</label>
+            <select name="gender" id="gender" required>
+                <option value="">-- Select --</option>
+                <option value="1">Male</option>
+                <option value="0">Female</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="vip">Purchased VIP?</label>
+            <select name="vip" id="vip" required>
+                <option value="">-- Select --</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="income">Annual Income ($)</label>
+            <input type="number" name="income" id="income" placeholder="60000" min="0" max="100000"  required>
+        </div>
+
+        <div class="form-group">
+            <label for="children">Number of Children</label>
+            <input type="number" name="children" id="children" placeholder="0" min="0" max="15" required>
+        </div>
+
+        <div class="form-group">
+            <label for="age">Age</label>
+            <input type="number" name="age" id="age" placeholder="30" min="18" max="100" required>
+        </div>
+
+        <div class="form-group">
+            <label for="attractiveness">Attractiveness (1-10)</label>
+            <input type="number" name="attractiveness" id="attractiveness" placeholder="7" min="1" max="10" required>
+        </div>
+
+        <button type="submit">Predict Matches</button>
+    </form>
+
+    {% if prediction is not none %}
+        <div class="result success">
+            Predicted Matches: <strong>{{ prediction }}</strong>
+        </div>
+    {% endif %}
+
+    {% if error_msg %}
+        <div class="result error">
+            {{ error_msg }}
+        </div>
+    {% endif %}
+</div>
+</body>
+</html>
